@@ -3,6 +3,7 @@ class Game:
         self.board = game_input
         self.size = size
 
+    # given a board, return a new board with the next step
     def new_step(self):
         new_board = []
         for i in range(self.size):
@@ -15,6 +16,7 @@ class Game:
             
         return new_board
 
+    # given a cell, return if it continues alive or not
     def cell_continues_alive(self, line, collumn):
         nearby_cells_alive = self.check_neighborhood(line, collumn)
         cell = self.board[line][collumn]
@@ -28,6 +30,7 @@ class Game:
 
         return new_cell
 
+    # given a cell, return the number of nearby cells alive
     def check_neighborhood(self, line, collumn):
         nearby_cells_alive = 0
         size = self.size
@@ -39,17 +42,19 @@ class Game:
         
         return nearby_cells_alive
 
+    # given a board, print it
     def show(self, new_board):
         for i in range(len(new_board)):
             print(''.join(new_board[i]))
 
-lines = int(input())
-game_input = []
-for i in range(lines):
-    line = list(input())
-    game_input.append(line)
 
 if __name__ == '__main__':
+    lines = int(input())
+    game_input = []
+    for i in range(lines):
+        line = list(input())
+        game_input.append(line)
+
     new_game = Game(game_input, lines)
     new_new_step = new_game.new_step()
     new_game.show(new_new_step)
