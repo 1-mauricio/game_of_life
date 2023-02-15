@@ -3,7 +3,7 @@ class Game:
         self.board = game_input
         self.size = size
 
-    # given a board, return a new board with the next step
+    # return a new board with the next step
     def new_step(self):
         new_board = []
         for i in range(self.size):
@@ -14,6 +14,7 @@ class Game:
                 new_line.append(new_cell)
             new_board.append(new_line)
             
+        self.board = new_board
         return new_board
 
     # given a cell, return if it continues alive or not
@@ -42,10 +43,21 @@ class Game:
         
         return nearby_cells_alive
 
-    # given a board, print it
-    def show(self, new_board):
-        for i in range(len(new_board)):
-            print(''.join(new_board[i]))
+    # return the board
+    def get_board(self):
+        return self.board
+
+    # return if the game is over or not
+    def check_game_over(self):
+        for i in range(len(self.board)):
+            for j in range(len(self.board)):
+                if self.board[i][j] == '1': return False
+        return True
+
+    # print the board
+    def show_board(self):
+        for i in range(len(self.board)):
+            print(''.join(self.board[i]))
 
 
 if __name__ == '__main__':
@@ -55,6 +67,7 @@ if __name__ == '__main__':
         line = list(input())
         game_input.append(line)
 
-    new_game = Game(game_input, lines)
-    new_new_step = new_game.new_step()
-    new_game.show(new_new_step)
+    game = Game(game_input, lines)
+    game.new_step()
+    game.show_board()
+
